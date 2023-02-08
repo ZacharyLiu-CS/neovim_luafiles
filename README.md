@@ -101,6 +101,8 @@ This repo works for tracking my lua config files of neovim.
 |Key|Mode|Effect|
 |--|--|--|
 |`<C-w>`|normal| close the buffer|
+|`right click on tab` |normal | show the buffer in a vertically splited window|
+|`left click on close icon`|normal| close the buffer |
 
 ### NVimTree
 |Key|Mode|Effect|
