@@ -4,13 +4,13 @@ if not status_ok then
 end
 
 -- close the buffer and remove the tab icon
-vim.api.nvim_set_keymap('n', '<C-w>', ":bd #<CR>", {})
+vim.api.nvim_set_keymap('n', '<C-w>', "Bdelete<CR>", {})
 
 bufferline.setup {
   options = {
     numbers = "ordinal", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
     close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-    right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+    right_mouse_command = "vertical sbuffer %d", -- can be a string | function, see "Mouse actions"
     left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
     middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
     -- NOTE: this plugin is designed with this icon in mind,
@@ -59,7 +59,14 @@ bufferline.setup {
     --     return true
     --   end
     -- end,
-    offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+    offsets = {
+      {
+      filetype = "NvimTree",
+      text = "File Explorer",
+      highlight = "Directory",
+      separator = true
+      }
+    },
     show_buffer_icons = true,
     show_buffer_close_icons = true,
     show_close_icon = true,

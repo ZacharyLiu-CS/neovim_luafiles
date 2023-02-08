@@ -49,6 +49,7 @@ return packer.startup(function(use)
   use "nvim-lualine/lualine.nvim"
   use "akinsho/bufferline.nvim"
   use "lewis6991/gitsigns.nvim"
+  use "moll/vim-bbye"                          -- close buffer in better way
 
   -- File exploer
   use "kyazdani42/nvim-tree.lua"
