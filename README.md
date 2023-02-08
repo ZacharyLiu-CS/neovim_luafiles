@@ -1,5 +1,5 @@
 # Targets
-This repo is used to track the lua config files of neovim
+This repo works for tracking my lua config files of neovim.
 
 ##  Pre-installed packages
 1. unzip
@@ -9,6 +9,13 @@ This repo is used to track the lua config files of neovim
 5. tmux
 6. ripgrep
 7. fd
+8. gcc,g++
+9. clang,clang++
+10. htop
+11. lazygit
+12. node
+(For markdown highlighting , null-ls needs a npm package)
+`npm install -g write-good`
 
 ## Plugins list and effect
 (in lua/plugins/catalogs.lua)
@@ -16,7 +23,7 @@ This repo is used to track the lua config files of neovim
   use 'wbthomason/packer.nvim'                  -- Have packer manage itself
 
   -- My plugins here
-  use "nvim-lua/plenary.nvim"                   -- Lua module required by many :plugins (e.g., telescope)
+  use "nvim-lua/plenary.nvim"                   -- Lua module required by lots of plugins (e.g., telescope)
 
   -- Color scheme
   use "folke/tokyonight.nvim"                   
