@@ -44,12 +44,14 @@ return packer.startup(function(use)
   -- Color scheme
   use "folke/tokyonight.nvim"                   -- config in colorscheme.lua file
   use "kyazdani42/nvim-web-devicons"            -- config the icon
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   -- Status line
   use "nvim-lualine/lualine.nvim"
   use "akinsho/bufferline.nvim"
   use "lewis6991/gitsigns.nvim"
   use "moll/vim-bbye"                          -- close buffer in better way
+  use "aserowy/tmux.nvim"
 
   -- File exploer
   use "kyazdani42/nvim-tree.lua"
