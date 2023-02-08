@@ -62,7 +62,7 @@ bufferline.setup {
     offsets = {
       {
       filetype = "NvimTree",
-      text = "File Explorer",
+      text = function() return vim.fn.getcwd() end,
       highlight = "Directory",
       separator = true
       }
@@ -85,21 +85,29 @@ bufferline.setup {
   highlights = {
     fill = {
       fg = { attribute = "fg", highlight = "#ff0000" },
-      bg = { attribute = "bg", highlight = "TabLine" },
+      bg = { attribute = "bg", highlight = "Pmenu" },
     },
     background = {
       fg = { attribute = "fg", highlight = "TabLine" },
       bg = { attribute = "bg", highlight = "TabLine" },
     },
+    numbers = {
+      fg = {attribute = 'fg', highlight = "TabLine"},
+      bg = {attribute = 'bg', highlight = "TabLine"},
+    },
+    numbers_visible = {
+      fg = {attribute = 'fg', highlight = "TabLine"},
+      bg = {attribute = 'bg', highlight = "TabLine"},
+    },
     numbers_selected = {
       fg = {attribute = 'fg', highlight = "#ff0000"},
-      bg = {attribute = 'bg', highlight = "TabLine"},
+      bg = {attribute = 'fg', highlight = "TabLine"},
       bold = true,
       italic = true,
     },
     buffer_selected = {
       fg = {attribute = 'fg', highlight = "#ff0000"},
-      bg = {attribute = 'bg', highlight = "TabLine"},
+      bg = {attribute = 'fg', highlight = "TabLine"},
       bold = true,
       italic = false,
     },
@@ -116,11 +124,10 @@ bufferline.setup {
       fg = { attribute = "fg", highlight = "TabLine" },
       bg = { attribute = "bg", highlight = "TabLine" },
     },
-    -- close_button_selected = {
-    --   fg = {attribute='fg',highlight='TabLineSel'},
-    --   bg ={attribute='bg',highlight='TabLineSel'}
-    --   },
-
+    close_button_selected = {
+      fg = { attribute = 'fg', highlight = '#00ff00' },
+      bg = { attribute = 'fg', highlight = 'TabLine' }
+    },
     tab_selected = {
       fg = { attribute = "fg", highlight = "Normal" },
       bg = { attribute = "bg", highlight = "Normal" },
