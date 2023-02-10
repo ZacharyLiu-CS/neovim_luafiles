@@ -14,4 +14,5 @@ null_ls.setup({ sources = sources })
 
 
 vim.api.nvim_set_keymap('n', '<A-f>', ":lua vim.lsp.buf.format()<CR>", {})
+vim.api.nvim_set_keymap('n', 'gl', ":lua vim.diagnostic.open_float()<CR>", {})
 vim.api.nvim_set_keymap('n', '<A-d>', ":lua vim.diagnostic.setqflist()<CR>", {})

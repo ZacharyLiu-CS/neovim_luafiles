@@ -1,10 +1,8 @@
 local status_ok, bufferline = pcall(require, "bufferline")
 if not status_ok then
+  vim.notify("Fail to load plugin: bufferline!")
   return
 end
-
--- close the buffer and remove the tab icon
-vim.api.nvim_set_keymap('n', '<C-w>', "Bdelete<CR>", {})
 
 bufferline.setup {
   options = {
@@ -176,7 +174,7 @@ bufferline.setup {
       bg = { attribute = "bg", highlight = "TabLine" },
     },
     separator_selected = {
-      fg = { attribute = "bg", highlight = "Normal" },
+       fg = { attribute = "bg", highlight = "Normal" },
       bg = { attribute = "bg", highlight = "Normal" },
     },
     -- separator_visible = {

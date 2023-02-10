@@ -66,11 +66,8 @@ keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Split the windows
 keymap("n", "<leader>sv", ":vsplit<CR>", opts)  -- split the window vertical
-keymap("n", "<leader>sh", ":split<CR>", opts)  -- split the window horizontal
+keymap("n", "<leader>sh", ":split<CR>", opts)   -- split the window horizontal
 
--- Terminal --
--- Better terminal navigation
--- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+-- Close the buffer and remove the tab icon
+vim.api.nvim_set_keymap("n", "<C-w>", ":Bdelete<CR>", {})
+

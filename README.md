@@ -14,8 +14,8 @@ This repo works for tracking my lua config files of neovim.
 10. htop
 11. lazygit
 12. node
-(For markdown highlighting , null-ls needs a npm package)
-`npm install -g write-good`
+(For markdown highlighting , null-ls needs a npm package: write-good, prettier)
+`npm install -g write-good/prettier`
 
 ## Plugins list and effect
 (in lua/plugins/catalogs.lua)
@@ -23,16 +23,19 @@ This repo works for tracking my lua config files of neovim.
   use 'wbthomason/packer.nvim'                  -- Have packer manage itself
 
   -- My plugins here
-  use "nvim-lua/plenary.nvim"                   -- Lua module required by lots of plugins (e.g., telescope)
+  use "nvim-lua/plenary.nvim"                   -- Lua module required by many plugins (e.g., telescope)
 
   -- Color scheme
-  use "folke/tokyonight.nvim"                   
+  use "folke/tokyonight.nvim"                   -- config in colorscheme.lua file
   use "kyazdani42/nvim-web-devicons"            -- config the icon
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   -- Status line
   use "nvim-lualine/lualine.nvim"
   use "akinsho/bufferline.nvim"
   use "lewis6991/gitsigns.nvim"
+  use "moll/vim-bbye"                          -- close buffer in better way
+  use "aserowy/tmux.nvim"
 
   -- File exploer
   use "kyazdani42/nvim-tree.lua"
@@ -97,6 +100,12 @@ This repo works for tracking my lua config files of neovim.
 |`jk/kj`|insert|fast exit|
 |`<leader>sv/sh`|normal|split the windows vertically or horizontally|
 
+### Tmux
+|Key|Mode|Effect|
+|--|--|--|
+|space|normal|leader key|
+|`<C-h/j/k/l>`| normal | toggle pane | 
+
 ### Buffer line
 |Key|Mode|Effect|
 |--|--|--|
@@ -107,10 +116,18 @@ This repo works for tracking my lua config files of neovim.
 ### NVimTree
 |Key|Mode|Effect|
 |--|--|--|
-|`<leader>e`|normal| activate the NVimTree window |
+|`<leader>e`|normal| activate/deactivate the NVimTree window |
 |`l`| /| edit file|
 |`h`| /| close node|
 |`v`| /| edit file in a vsplit window|
+|`a`| /| create file|
+|`c`| /| copy file|
+|`x`| /| cut file|
+|`p`| /| paste file|
+|`d`| /| remove file|
+|`r`| /| rename file|
+|`y`| /| copy name|
+|`Y`| /| copy path|
 
 ### Completion
 |Key|Mode| Effect|

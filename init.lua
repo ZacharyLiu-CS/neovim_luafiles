@@ -16,4 +16,3 @@ require("plugins.autopairs_config")
 require("plugins.toggleterm_config")
 require("plugins.project_config")
 require("plugins.impatient_config")
-
