@@ -9,11 +9,14 @@ This repo works for tracking my lua config files of neovim.
 5. tmux
 6. ripgrep
 7. fd
-8. gcc,g++
-9. clang,clang++
+8. gcc
+9. clang
 10. htop
 11. lazygit
 12. node
+13. flake8
+14. stylua
+15. rustfmt
 (For markdown highlighting , null-ls needs a npm package: write-good, prettier)
 `npm install -g write-good/prettier`
 
