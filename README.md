@@ -21,7 +21,8 @@ This repo is highly inspired by [@ChristianChiarulli](https://github.com/Christi
 10. lazygit
 11. stylua
 12. rustfmt
-13. npm packages: write-good, prettier  (For markdown highlighting by null-ls) 
+13. npm packages: write-good, prettier  
+(For markdown highlighting by null-ls) 
     `npm install -g write-good/prettier`
 
 ## Clipboard Settings
@@ -40,7 +41,9 @@ This repo is highly inspired by [@ChristianChiarulli](https://github.com/Christi
 ## Tmux true color settings
 
 1. set $TERM variable of shell (e.g., .bashrc, .zshrc)
-`export TERM=screen-256color`
+```
+[[ -n $TMUX ]] && export TERM="screen-256color"
+```
 
 2. set in ~/.tmux.conf file 
 ```
