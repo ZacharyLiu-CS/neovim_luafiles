@@ -50,7 +50,7 @@ This repo is highly inspired by [@ChristianChiarulli](https://github.com/Christi
 set-option -sg escape-time 10
 set-option -g focus-events on
 set -g default-terminal "screen-256color"
-set-option -ga terminal-overrides ",screen-256color:RGB"
+set -ga terminal-overrides ",xterm-256color*:RGB"
 ```
 
 ## Plugins list and effect
