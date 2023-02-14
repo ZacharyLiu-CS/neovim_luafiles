@@ -1,6 +1,11 @@
-# Targets
+# Zach's Neovim Plugins Repo
 
-This repo works for tracking my lua config files of neovim.
+Those plugins can work together to provide an IDE-like experience (e.g., vscode, idea).
+You can toggle between different files, search and jump any files by you want, enjoy the 
+smart code hints, completion and diagnosis after integrating morden language LSP servers. 
+
+This repo is highly inspired by [@ChristianChiarulli](https://github.com/ChristianChiarulli) of his video: [Neovim IDE from Scratch - Introduction (100% lua config)](https://www.youtube.com/watch?v=ctH-a-1eUME&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ). Great thanks for him!
+
 
 ## Pre-installed packages
 
