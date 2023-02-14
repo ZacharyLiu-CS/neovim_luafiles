@@ -80,6 +80,7 @@ return packer.startup(function(use)
   -- Code highlihting and autopairs
   use "nvim-treesitter/nvim-treesitter"
   use "windwp/nvim-autopairs"
+  use "lukas-reineke/indent-blankline.nvim"
 
   -- Comment
   use "numToStr/Comment.nvim"
