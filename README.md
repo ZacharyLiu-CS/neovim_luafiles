@@ -14,9 +14,8 @@ This repo works for tracking my lua config files of neovim.
 10. htop
 11. lazygit
 12. node
-13. flake8
-14. stylua
-15. rustfmt
+13. stylua
+14. rustfmt
 (For markdown highlighting , null-ls needs a npm package: write-good, prettier)
 `npm install -g write-good/prettier`
 
