@@ -14,7 +14,7 @@ vim.keymap.set('n', '<leader>fm', builtin.keymaps, {})
 vim.api.nvim_set_keymap(
         'n',
         '<leader>fp',
-        ":lua require'telescope'.extensions.project.project{}<CR>",
+        ":lua require'telescope'.extensions.projects.projects{}<CR>",
         {noremap = true, silent = true}
 )
 

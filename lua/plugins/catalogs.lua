@@ -101,6 +101,8 @@ return packer.startup(function(use)
   -- Fast start
   use "lewis6991/impatient.nvim"
 
+  use "folke/which-key.nvim"
+
 
 
 
