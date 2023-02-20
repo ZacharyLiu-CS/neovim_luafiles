@@ -1,11 +1,10 @@
 # Zach's Neovim Plugins Repo
 
 Those plugins can work together to provide an IDE-like experience (e.g., vscode, idea).
-You can toggle between different files, search and jump any files by you want, enjoy the 
-smart code hints, completion and diagnosis after integrating morden language LSP servers. 
+You can toggle between different files, search and jump any files by you want, enjoy the
+smart code hints, completion and diagnosis after integrating morden language LSP servers.
 
 This repo is highly inspired by [@ChristianChiarulli](https://github.com/ChristianChiarulli) of his video: [Neovim IDE from Scratch - Introduction (100% lua config)](https://www.youtube.com/watch?v=ctH-a-1eUME&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ). Great thanks for him!
-
 
 ## Pre-installed packages
 
@@ -22,7 +21,7 @@ This repo is highly inspired by [@ChristianChiarulli](https://github.com/Christi
 11. stylua
 12. rustfmt
 13. npm packages: write-good, prettier  
-(For markdown highlighting by null-ls) 
+    (For markdown highlighting by null-ls)
     `npm install -g write-good/prettier`
 
 ## Clipboard Settings
@@ -41,11 +40,13 @@ This repo is highly inspired by [@ChristianChiarulli](https://github.com/Christi
 ## Tmux true color settings
 
 1. set $TERM variable of shell (e.g., .bashrc, .zshrc)
+
 ```
 [[ -n $TMUX ]] && export TERM="screen-256color"
 ```
 
-2. set in ~/.tmux.conf file 
+2. set in ~/.tmux.conf file
+
 ```
 set-option -sg escape-time 10
 set-option -g focus-events on
@@ -133,6 +134,8 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 | ------------------------ | ------------- | -------------------------------------------- |
 | space                    | normal        | leader key                                   |
 | `<C-q>`                  | virsual       | select blocks by column                      |
+| `<C-s>`                  | normal        | save buffer                                  |
+| `<C-w>`                  | normal        | close buffer                                 |
 | `<C-h/j/k/l>`            | normal        | toggle window                                |
 | `<C-Up/Down/Left/Right>` | normal        | resize window                                |
 | `<S-h/l>`                | normal        | toggle buffer                                |
@@ -212,18 +215,27 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 | ------------ | ------ | --------------- |
 | `<leader>ff` | normal | find files      |
 | `<leader>fg` | normal | fuzzy grep      |
+| `<leader>fp` | normal | toggle projects |
 | `<leader>fb` | normal | find buffers    |
+|	`<leader>fB` | normal | checkout branch |
 | `<leader>fh` | normal | find help flags |
 | `<leader>fm` | normal | find keymaps    |
-| `<leader>fp` | normal | toggle projects |
-
+| `<leader>fc` | normal | Commands        |
+| `<leader>fC` | normal | Colorscheme     |
+| `<leader>fM` | normal | Man Pages"      |
+| `<leader>fr` | normal | Open Recent File|
+| `<leader>fR` | normal | Registers       |
 ### Toggleterm
 
 | Key          | Mode   | Effect                       |
 | ------------ | ------ | ---------------------------- |
 | `<C-\>`      | normal | enable or disable a terminal |
-| `<leader>lg` | normal | open lazygit in terminal     |
-| `<leader>no` | normal | open nodejs in terminal      |
-| `<leader>nc` | normal | open ncdu in terminal        |
-| `<leader>ht` | normal | open htop in terminal        |
-| `<leader>py` | normal | open python in terminal      |
+| `<leader>ty` | normal | open python in terminal      |
+| `<leader>tn` | normal | open nodejs in terminal      |
+| `<leader>tu` | normal | open ncdu in terminal        |
+| `<leader>tt` | normal | open htop in terminal        |
+| `<leader>tp` | normal | open python in terminal      |
+| `<leader>tg` | normal | open lazygit in terminal     |
+| `<leader>tf` | normal | open a float terminal        |
+| `<leader>th` | normal | open a horizontal terminal   |
+| `<leader>tv` | normal | open a vertical terminal     |

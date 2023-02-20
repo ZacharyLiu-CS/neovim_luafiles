@@ -36,21 +36,20 @@ packer.init({
 })
 
 return packer.startup(function(use)
-  use 'wbthomason/packer.nvim'                  -- Have packer manage itself
+  use 'wbthomason/packer.nvim'                      -- Have packer manage itself
 
   -- My plugins here
-  use "nvim-lua/plenary.nvim"                   -- Lua module required by many :plugins (e.g., telescope)
+  use "nvim-lua/plenary.nvim"                       -- Lua module required by many :plugins (e.g., telescope)
 
   -- Color scheme
-  use "folke/tokyonight.nvim"                   -- config in colorscheme.lua file
-  use "kyazdani42/nvim-web-devicons"            -- config the icon
-  use { "catppuccin/nvim", as = "catppuccin" }
+  use "kyazdani42/nvim-web-devicons"                -- config the icon
+  use "AbdelrahmanDwedar/awesome-nvim-colorschemes" -- config in colorscheme.lua file
 
   -- Status line
   use "nvim-lualine/lualine.nvim"
   use "akinsho/bufferline.nvim"
   use "lewis6991/gitsigns.nvim"
-  use "moll/vim-bbye"                          -- close buffer in better way
+  use "moll/vim-bbye"                               -- close buffer in better way
   use "aserowy/tmux.nvim"
 
   -- File exploer
@@ -87,6 +86,7 @@ return packer.startup(function(use)
 
   -- Fuzzy search
   use "nvim-telescope/telescope.nvim"
+  use {'nvim-telescope/telescope-ui-select.nvim' }
     -- Telescope plugins
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use "nvim-telescope/telescope-project.nvim"

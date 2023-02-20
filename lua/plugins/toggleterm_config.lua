@@ -2,12 +2,6 @@ local status_ok, toggleterm = pcall(require, "toggleterm")
 if not status_ok then
 	return
 end
-vim.api.nvim_set_keymap('n', '<leader>lg', ":lua _LAZYGIT_TOGGLE()<CR>", {})
-vim.api.nvim_set_keymap('n', '<leader>no', ":lua _NODE_TOGGLE()<CR>", {})
-vim.api.nvim_set_keymap('n', '<leader>nc', ":lua _NCDU_TOGGLE()<CR>", {})
-vim.api.nvim_set_keymap('n', '<leader>ht', ":lua _HTOP_TOGGLE()<CR>", {})
-vim.api.nvim_set_keymap('n', '<leader>py', ":lua _PYTHON_TOGGLE()<CR>", {})
-
 
 
 

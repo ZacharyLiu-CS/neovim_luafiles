@@ -48,15 +48,6 @@ local location = {
 	padding = 0,
 }
 
--- cool function for progress
-local progress = function()
-	local current_line = vim.fn.line(".")
-	local total_lines = vim.fn.line("$")
-	local chars = { " ", "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
-	local line_ratio = current_line / total_lines
-	local index = math.ceil(line_ratio * #chars)
-	return chars[index]
-end
 
 local spaces = function()
 	return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
@@ -72,13 +63,13 @@ lualine.setup({
 		always_divide_middle = true,
 	},
 	sections = {
-		lualine_a = { branch, diagnostics },
-		lualine_b = { mode },
+		lualine_a = { mode },
+		lualine_b = { branch, diagnostics },
 		lualine_c = { "filename"},
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_x = { diff, spaces, "encoding", filetype },
 		lualine_y = { location },
-		lualine_z = { progress },
+		lualine_z = { "progress" },
 	},
 	inactive_sections = {
 		lualine_a = {},

@@ -64,10 +64,9 @@ keymap("v", "p", '"_dP', opts)
 -- File explorer in left navigator (Nvim-tree)
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
--- Split the windows
-keymap("n", "<leader>sv", ":vsplit<CR>", opts)  -- split the window vertical
-keymap("n", "<leader>sh", ":split<CR>", opts)   -- split the window horizontal
+-- Save the buffer
+keymap("n", "<C-s>", ":w!<CR>", opts) 
 
 -- Close the buffer and remove the tab icon
-vim.api.nvim_set_keymap("n", "<C-w>", ":Bdelete<CR>", {})
+keymap("n", "<C-w>", ":Bdelete<CR>", opts) 
 
