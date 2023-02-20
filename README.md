@@ -56,72 +56,88 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 
 ## Plugins list and effect
 
-(in lua/plugins/catalogs.lua)
+(in lua/plugins/catalogs.lua, using lazy to manage all plugins)
 
 ```
-  use 'wbthomason/packer.nvim'                  -- Have packer manage itself
+	"wbthomason/packer.nvim", -- Have packer manage itself
 
-  -- My plugins here
-  use "nvim-lua/plenary.nvim"                   -- Lua module required by many plugins (e.g., telescope)
+	-- My plugins here
+	"nvim-lua/plenary.nvim", -- Lua module required by many :plugins (e.g., telescope)
 
-  -- Color scheme
-  use "folke/tokyonight.nvim"                   -- config in colorscheme.lua file
-  use "kyazdani42/nvim-web-devicons"            -- config the icon
-  use { "catppuccin/nvim", as = "catppuccin" }
+	-- Color scheme
+	"kyazdani42/nvim-web-devicons", -- config the icon
+	"AbdelrahmanDwedar/awesome-nvim-colorschemes", -- config in colorscheme.lua file
 
-  -- Status line
-  use "nvim-lualine/lualine.nvim"
-  use "akinsho/bufferline.nvim"
-  use "lewis6991/gitsigns.nvim"
-  use "moll/vim-bbye"                          -- close buffer in better way
-  use "aserowy/tmux.nvim"
+	-- Status line
+	"nvim-lualine/lualine.nvim",
+	"akinsho/bufferline.nvim",
+	"lewis6991/gitsigns.nvim",
+	"moll/vim-bbye", -- close buffer in better way
+	"aserowy/tmux.nvim",
 
-  -- File exploer
-  use "kyazdani42/nvim-tree.lua"
+	-- File exploer
+	"kyazdani42/nvim-tree.lua",
 
-  -- Completion
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/cmp-nvim-lua'
-  use 'onsails/lspkind-nvim'
-  use 'rafamadriz/friendly-snippets'
+	-- Completion
+	"hrsh7th/nvim-cmp",
+	"hrsh7th/cmp-nvim-lsp",
+	"hrsh7th/cmp-buffer",
+	"hrsh7th/cmp-path",
+	"hrsh7th/cmp-cmdline",
+	"hrsh7th/cmp-nvim-lua",
+	"onsails/lspkind-nvim",
+	"rafamadriz/friendly-snippets",
 
-  -- Snippets
-  use 'L3MON4D3/LuaSnip'
-  use 'saadparwaiz1/cmp_luasnip'
+	-- Snippets
+	"L3MON4D3/LuaSnip",
+	"saadparwaiz1/cmp_luasnip",
 
-  -- LSP
-  use "neovim/nvim-lspconfig"
-  use "williamboman/mason.nvim"
-  use "williamboman/mason-lspconfig.nvim"
-  use "jose-elias-alvarez/null-ls.nvim"
-  use "RRethy/vim-illuminate"
+	-- LSP
+	"neovim/nvim-lspconfig",
+	"williamboman/mason.nvim",
+	"williamboman/mason-lspconfig.nvim",
+	"jose-elias-alvarez/null-ls.nvim",
+	"RRethy/vim-illuminate",
 
-  -- Code highlihting and autopairs
-  use "nvim-treesitter/nvim-treesitter"
-  use "windwp/nvim-autopairs"
+	-- Code highlihting and autopairs
+	{
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			"RRethy/nvim-treesitter-textsubjects",
+		},
+	},
 
-  -- Comment
-  use "numToStr/Comment.nvim"
+	"windwp/nvim-autopairs",
+	"lukas-reineke/indent-blankline.nvim",
 
-  -- Fuzzy search
-  use "nvim-telescope/telescope.nvim"
-    -- Telescope plugins
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use "nvim-telescope/telescope-project.nvim"
+	-- Comment
+	"numToStr/Comment.nvim",
 
+	-- Fuzzy search
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"nvim-telescope/telescope-ui-select.nvim",
+			"nvim-telescope/telescope-project.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+			},
+		},
+	},
+	-- Telescope plugins
 
-  -- Float terminal
-  use "akinsho/toggleterm.nvim"
+	-- Float terminal
+	"akinsho/toggleterm.nvim",
 
-  -- Project management
-  use "ahmedkhalf/project.nvim"
+	-- Project management
+	"ahmedkhalf/project.nvim",
 
-  -- Fast start
-  use "lewis6991/impatient.nvim"
+	-- Fast start
+	"lewis6991/impatient.nvim",
+
+	"folke/which-key.nvim",
+
 ```
 
 ## Key bindings
@@ -185,16 +201,12 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 | `<C-e>`   | insert | abort the completion      |
 | `<Tab>`   | insert | select the next item      |
 
-### Treesitter textobjects select 
+### Treesitter textobjects select
 
-| Key       | Mode   | Effect                    |
-| --------- | ------ | ------------------------- |
-| `af`   | visual | select outer function |
-| `if`   | visual | select inner function |
-| `ac`   | visual | select outer class    |
-| `ic`   | visual | select inner class    |
-| `as`   | visual | select all scope      |
-
+| Key | Mode   | Effect       |
+| --- | ------ | ------------ |
+| `.` | visual | smart select |
+| `,` | visual | last select  |
 
 ### LSP
 
@@ -212,30 +224,31 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 
 ### Comment
 
-| Key           | Mode    | Effect                                  |
-| ------------- | ------- | --------------------------------------- |
-| `gcc`         | normal  | line-comment toggle                     |
-| `gbc`         | normal  | block-comment toggle                    |
-| `gc`          | visual  | line-comment toggle                     |
-| `gb`          | visual  | block-comment toggle                    |
-| `gco/gcO/gcA` | normal  | add comment on the line above/below/end |
+| Key           | Mode   | Effect                                  |
+| ------------- | ------ | --------------------------------------- |
+| `gcc`         | normal | line-comment toggle                     |
+| `gbc`         | normal | block-comment toggle                    |
+| `gc`          | visual | line-comment toggle                     |
+| `gb`          | visual | block-comment toggle                    |
+| `gco/gcO/gcA` | normal | add comment on the line above/below/end |
 
 ### Telescope
 
-| Key          | Mode   | Effect          |
-| ------------ | ------ | --------------- |
-| `<leader>ff` | normal | find files      |
-| `<leader>fg` | normal | fuzzy grep      |
-| `<leader>fp` | normal | toggle projects |
-| `<leader>fb` | normal | find buffers    |
-|	`<leader>fB` | normal | checkout branch |
-| `<leader>fh` | normal | find help flags |
-| `<leader>fm` | normal | find keymaps    |
-| `<leader>fc` | normal | Commands        |
-| `<leader>fC` | normal | Colorscheme     |
-| `<leader>fM` | normal | Man Pages"      |
-| `<leader>fr` | normal | Open Recent File|
-| `<leader>fR` | normal | Registers       |
+| Key          | Mode   | Effect           |
+| ------------ | ------ | ---------------- |
+| `<leader>ff` | normal | find files       |
+| `<leader>fg` | normal | fuzzy grep       |
+| `<leader>fp` | normal | toggle projects  |
+| `<leader>fb` | normal | find buffers     |
+| `<leader>fB` | normal | checkout branch  |
+| `<leader>fh` | normal | find help flags  |
+| `<leader>fm` | normal | find keymaps     |
+| `<leader>fc` | normal | Commands         |
+| `<leader>fC` | normal | Colorscheme      |
+| `<leader>fM` | normal | Man Pages"       |
+| `<leader>fr` | normal | Open Recent File |
+| `<leader>fR` | normal | Registers        |
+
 ### Toggleterm
 
 | Key          | Mode   | Effect                       |
