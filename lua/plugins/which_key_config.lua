@@ -89,13 +89,15 @@ local mappings = {
 
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	["b"] = { "<cmd>lua require 'telescope.builtin'.buffers()<CR>", "Switch Buffers" },
-	P = {
-		name = "Packer",
-		c = { "<cmd>PackerCompile<cr>", "Compile" },
-		i = { "<cmd>PackerInstall<cr>", "Install" },
-		s = { "<cmd>PackerSync<cr>", "Sync" },
-		S = { "<cmd>PackerStatus<cr>", "Status" },
-		u = { "<cmd>PackerUpdate<cr>", "Update" },
+	L = {
+		name = "Lazy",
+		h = { "<cmd>Lazy home<cr>", "Home" },
+		i = { "<cmd>Lazy install<cr>", "Install" },
+		s = { "<cmd>Lazy sync<cr>", "Sync" },
+    c = { "<cmd>Lazy clean<cr>", "Clean"},
+		C = { "<cmd>Lazy health<cr>", "Check" },
+		u = { "<cmd>Lazy update<cr>", "Update" },
+    p = { "<cmd>Lazy profile<cr>", "Profile"},
 	},
 	g = {
 		name = "Git",
