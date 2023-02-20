@@ -133,14 +133,14 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 | Key                      | Mode          | Effect                                       |
 | ------------------------ | ------------- | -------------------------------------------- |
 | space                    | normal        | leader key                                   |
-| `<C-q>`                  | virsual       | select blocks by column                      |
+| `<C-q>`                  | visual        | select blocks by column                      |
 | `<C-s>`                  | normal        | save buffer                                  |
 | `<C-w>`                  | normal        | close buffer                                 |
 | `<C-h/j/k/l>`            | normal        | toggle window                                |
 | `<C-Up/Down/Left/Right>` | normal        | resize window                                |
 | `<S-h/l>`                | normal        | toggle buffer                                |
 | `<A-j/k>`                | normal/visual | move text up and down                        |
-| `</>`                    | virsual       | move text left and right                     |
+| `</>`                    | visual        | move text left and right                     |
 | `jk/kj`                  | insert        | fast exit                                    |
 | `<leader>sv/sh`          | normal        | split the windows vertically or horizontally |
 
@@ -185,6 +185,17 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 | `<C-e>`   | insert | abort the completion      |
 | `<Tab>`   | insert | select the next item      |
 
+### Treesitter textobjects select 
+
+| Key       | Mode   | Effect                    |
+| --------- | ------ | ------------------------- |
+| `af`   | visual | select outer function |
+| `if`   | visual | select inner function |
+| `ac`   | visual | select outer class    |
+| `ic`   | visual | select inner class    |
+| `as`   | visual | select all scope      |
+
+
 ### LSP
 
 | Key          | Mode   | Effect                   |
@@ -205,8 +216,8 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 | ------------- | ------- | --------------------------------------- |
 | `gcc`         | normal  | line-comment toggle                     |
 | `gbc`         | normal  | block-comment toggle                    |
-| `gc`          | virsual | line-comment toggle                     |
-| `gb`          | virsual | block-comment toggle                    |
+| `gc`          | visual  | line-comment toggle                     |
+| `gb`          | visual  | block-comment toggle                    |
 | `gco/gcO/gcA` | normal  | add comment on the line above/below/end |
 
 ### Telescope
