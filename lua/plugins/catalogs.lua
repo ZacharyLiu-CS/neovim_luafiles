@@ -1,114 +1,99 @@
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
-
-
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost catalogs.lua source <afile> | PackerSync
-  augroup end
-]])
-
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
+-- a protected call so we don't error out on first use
+local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
-  vim.notify("load packer modue failed!")
+  vim.notify("load lazy modue failed!")
 	return
 end
 
--- Have packer use a popup window
-packer.init({
-	display = {
-		open_fn = function()
-			return require("packer.util").float({ border = "rounded" })
-		end,
-	},
-})
-
-return packer.startup(function(use)
-  use 'wbthomason/packer.nvim'                      -- Have packer manage itself
+lazy.setup({
+  'wbthomason/packer.nvim',                      -- Have packer manage itself
 
   -- My plugins here
-  use "nvim-lua/plenary.nvim"                       -- Lua module required by many :plugins (e.g., telescope)
+  "nvim-lua/plenary.nvim",                       -- Lua module required by many :plugins (e.g., telescope)
 
   -- Color scheme
-  use "kyazdani42/nvim-web-devicons"                -- config the icon
-  use "AbdelrahmanDwedar/awesome-nvim-colorschemes" -- config in colorscheme.lua file
+  "kyazdani42/nvim-web-devicons",                -- config the icon
+  "AbdelrahmanDwedar/awesome-nvim-colorschemes", -- config in colorscheme.lua file
 
   -- Status line
-  use "nvim-lualine/lualine.nvim"
-  use "akinsho/bufferline.nvim"
-  use "lewis6991/gitsigns.nvim"
-  use "moll/vim-bbye"                               -- close buffer in better way
-  use "aserowy/tmux.nvim"
+  "nvim-lualine/lualine.nvim",
+  "akinsho/bufferline.nvim",
+  "lewis6991/gitsigns.nvim",
+  "moll/vim-bbye",                               -- close buffer in better way
+  "aserowy/tmux.nvim",
 
   -- File exploer
-  use "kyazdani42/nvim-tree.lua"
+  "kyazdani42/nvim-tree.lua",
 
   -- Completion
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/cmp-nvim-lua'
-  use 'onsails/lspkind-nvim'
-  use 'rafamadriz/friendly-snippets'
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-cmdline',
+  'hrsh7th/cmp-nvim-lua',
+  'onsails/lspkind-nvim',
+  'rafamadriz/friendly-snippets',
 
   -- Snippets
-  use 'L3MON4D3/LuaSnip'
-  use 'saadparwaiz1/cmp_luasnip'
+  'L3MON4D3/LuaSnip',
+  'saadparwaiz1/cmp_luasnip',
 
   -- LSP
-  use "neovim/nvim-lspconfig"
-  use "williamboman/mason.nvim"
-  use "williamboman/mason-lspconfig.nvim"
-  use "jose-elias-alvarez/null-ls.nvim"
-  use "RRethy/vim-illuminate"
+  "neovim/nvim-lspconfig",
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
+  "jose-elias-alvarez/null-ls.nvim",
+  "RRethy/vim-illuminate",
 
   -- Code highlihting and autopairs
-  use "nvim-treesitter/nvim-treesitter"
-  use "windwp/nvim-autopairs"
-  use "lukas-reineke/indent-blankline.nvim"
+  {
+    "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects'
+    },
+  },
+
+  "windwp/nvim-autopairs",
+  "lukas-reineke/indent-blankline.nvim",
 
   -- Comment
-  use "numToStr/Comment.nvim"
+  "numToStr/Comment.nvim",
 
   -- Fuzzy search
-  use "nvim-telescope/telescope.nvim"
-  use {'nvim-telescope/telescope-ui-select.nvim' }
+  {"nvim-telescope/telescope.nvim",
+    dependencies = {
+      'nvim-telescope/telescope-ui-select.nvim',
+      "nvim-telescope/telescope-project.nvim",
+      {
+        'nvim-telescope/telescope-fzf-native.nvim', build = 'make' 
+      },
+    },
+  },
     -- Telescope plugins
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use "nvim-telescope/telescope-project.nvim"
 
 
   -- Float terminal
-  use "akinsho/toggleterm.nvim"
+  "akinsho/toggleterm.nvim",
 
   -- Project management
-  use "ahmedkhalf/project.nvim"
+  "ahmedkhalf/project.nvim",
 
   -- Fast start
-  use "lewis6991/impatient.nvim"
+  "lewis6991/impatient.nvim",
 
-  use "folke/which-key.nvim"
-
-
-
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+  "folke/which-key.nvim",
+})
