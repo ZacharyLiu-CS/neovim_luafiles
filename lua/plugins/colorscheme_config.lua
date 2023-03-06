@@ -51,5 +51,6 @@ themes_plugin.setup({
 })
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not status_ok then
+	vim.notify("Fail to setup colorscheme!")
 	return
 end

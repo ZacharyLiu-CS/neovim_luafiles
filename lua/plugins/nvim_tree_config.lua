@@ -1,5 +1,6 @@
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
+  vim.notify("Fail to load plugin: nvim-tree!", "error")
   return
 end
 

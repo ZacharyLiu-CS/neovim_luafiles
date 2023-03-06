@@ -1,6 +1,6 @@
 local status_ok, tmux = pcall(require, "tmux")
 if not status_ok then
-  vim.notify("Tmux plugin load failed!")
+  vim.notify("Fail to load plugin: tmux!", "error")
   return
 end
 

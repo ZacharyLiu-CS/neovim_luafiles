@@ -1,5 +1,6 @@
 local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
+	vim.notify("Fail to load plugin: which-key!", "error")
 	return
 end
 
@@ -81,6 +82,13 @@ local opts = {
 local mappings = {
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["w"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+  c = {
+    name = "ChatGPT",
+    g = {"<cmd>ChatGPT<CR>", "ChatGPT"},
+    a = {"<cmd>ChatGPTActAs<CR>", "ChatGPTActAs"},
+    c = {"<cmd>ChatGPTCompleteCode<CR>", "ChatGPTCompleteCode"},
+
+  },
 	s = {
 		name = "Split window",
 		h = { "<cmd>split<CR>", "Horizontal" },

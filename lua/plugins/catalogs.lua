@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 -- a protected call so we don't error out on first use
 local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
-	vim.notify("load lazy modue failed!")
+	vim.notify("Fail to load plugin: lazy!", "error")
 	return
 end
 
@@ -23,6 +23,7 @@ lazy.setup({
 
 	-- My plugins here
 	"nvim-lua/plenary.nvim", -- Lua module required by many :plugins (e.g., telescope)
+  "rcarriga/nvim-notify",
 
 	-- Color scheme
 	"kyazdani42/nvim-web-devicons", -- config the icon
@@ -34,6 +35,9 @@ lazy.setup({
 	"lewis6991/gitsigns.nvim",
 	"moll/vim-bbye", -- close buffer in better way
 	"aserowy/tmux.nvim",
+
+	-- Better colorcolumn
+	"m4xshen/smartcolumn.nvim",
 
 	-- File exploer
 	"kyazdani42/nvim-tree.lua",
@@ -96,5 +100,16 @@ lazy.setup({
 	-- Fast start
 	"lewis6991/impatient.nvim",
 
+	-- Help to insert command
 	"folke/which-key.nvim",
+
+	-- ChatGPT
+	{
+		"jackMort/ChatGPT.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+	},
 })
