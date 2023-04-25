@@ -102,14 +102,7 @@ lazy.setup({
 
 	-- Help to insert command
 	"folke/which-key.nvim",
+  
+  "folke/zen-mode.nvim",
 
-	-- ChatGPT
-	{
-		"jackMort/ChatGPT.nvim",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-	},
 })

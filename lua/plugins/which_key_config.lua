@@ -82,13 +82,6 @@ local opts = {
 local mappings = {
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["w"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-  c = {
-    name = "ChatGPT",
-    g = {"<cmd>ChatGPT<CR>", "ChatGPT"},
-    a = {"<cmd>ChatGPTActAs<CR>", "ChatGPTActAs"},
-    c = {"<cmd>ChatGPTCompleteCode<CR>", "ChatGPTCompleteCode"},
-
-  },
 	s = {
 		name = "Split window",
 		h = { "<cmd>split<CR>", "Horizontal" },
@@ -182,6 +175,11 @@ local mappings = {
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
 	},
+  z ={
+    name = "ZenMode",
+    z = { "<cmd>ZenMode<cr>", "Enter zen mode" },
+    c = { "<cmd>close<cr>", "Leave zen mode"}
+  }
 }
 
 which_key.setup(setup)

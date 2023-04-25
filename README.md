@@ -137,6 +137,8 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 	"lewis6991/impatient.nvim",
 
 	"folke/which-key.nvim",
+  
+    "folke/zen-mode.nvim",
 
 ```
 
@@ -263,3 +265,11 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 | `<leader>tf` | normal | open a float terminal        |
 | `<leader>th` | normal | open a horizontal terminal   |
 | `<leader>tv` | normal | open a vertical terminal     |
+
+### ZenMode
+
+| Key          | Mode   | Effect                       |
+| ------------ | ------ | ---------------------------- |
+| `<leader>zz` | normal | Enter zen mode |
+| `<leader>zc` | normal | Leave zen mode | 
+
