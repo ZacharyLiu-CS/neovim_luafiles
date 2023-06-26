@@ -23,7 +23,7 @@ lazy.setup({
 
 	-- My plugins here
 	"nvim-lua/plenary.nvim", -- Lua module required by many :plugins (e.g., telescope)
-  "rcarriga/nvim-notify",
+	"rcarriga/nvim-notify",
 
 	-- Color scheme
 	"kyazdani42/nvim-web-devicons", -- config the icon
@@ -102,7 +102,11 @@ lazy.setup({
 
 	-- Help to insert command
 	"folke/which-key.nvim",
-  
-  "folke/zen-mode.nvim",
 
+  -- Quick jump to other location
+	{
+		"phaazon/hop.nvim",
+		branch = "v2", -- optional but strongly recommended
+	},
+	"folke/zen-mode.nvim",
 })

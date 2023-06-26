@@ -15,7 +15,7 @@ This repo is highly inspired by [@ChristianChiarulli](https://github.com/Christi
 5. tmux
 6. ripgrep
 7. fd
-8. gcc, clang, rust, python, lua, node
+8. gcc, clang, rust, python, lua, node, zig
 9. htop
 10. lazygit
 11. stylua
@@ -136,8 +136,16 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 	-- Fast start
 	"lewis6991/impatient.nvim",
 
+    -- Help to insert command
 	"folke/which-key.nvim",
-  
+
+    -- Quick jump to other location
+	{
+		"phaazon/hop.nvim",
+		branch = "v2", -- optional but strongly recommended
+	},
+    
+    -- Zen mode
     "folke/zen-mode.nvim",
 
 ```
@@ -176,6 +184,13 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 | `<C-w>`                    | normal | close the buffer                               |
 | `right click on tab`       | normal | show the buffer in a vertically splited window |
 | `left click on close icon` | normal | close the buffer                               |
+
+### Hop 
+| Key       | Mode   | Effect                        |
+| ----------| ------ | ----------------------------- |
+| `f`       | normal |  hop words                    |
+| `F`       | normal | hop next 1 char               |
+
 
 ### NVimTree
 
