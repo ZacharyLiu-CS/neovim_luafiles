@@ -1,6 +1,6 @@
 local status_ok, zen_mode = pcall(require, "zen-mode")
 if not status_ok then
-  vim.notify("Fail to load plugin: smart column!", "error")
+  vim.notify("Fail to load plugin: zen-mode!", "error")
   return
 end
 zen_mode.setup({
