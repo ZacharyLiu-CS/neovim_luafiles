@@ -20,20 +20,20 @@ skel.setup({
 
 	-- file pattern -> template mappings (default)
 	mappings = {
-		["LICENSE"] = { "BSD_3Clause.license", "GNU_GPLv3.license", "MIT.license"},
-		["*.cpp"] = "skel.cc",
-		["*.cc"] = "skel.cc",
+		["LICENSE"] = { "BSD_3Clause.license", "GNU_GPLv3.license", "MIT.license" },
+		["*.cpp"] = { "skel.cc", "skel_test.cc" },
+		["*.cc"] = { "skel.cc", "skel_test.cc" },
 		["*.hpp"] = "skel.h",
 		["*.h"] = "skel.h",
 		["*.hh"] = "skel.h",
-    ["*.go"] = "skel.go",
+		["*.go"] = "skel.go",
 		["*.c"] = "skel.c",
 		["*.py"] = "skel.py",
 		["*.rs"] = "skel.rs",
 		["*.lua"] = "skel.lua",
 		["*.sh"] = "skel.sh",
-    ["CMakeLists.txt"] = "skel.cmake",
-    ["Makefile"] = "skel.make",
+		["CMakeLists.txt"] = "skel.cmake",
+		["Makefile"] = "skel.make",
 	},
 
 	-- substitutions in templates (default)
@@ -44,7 +44,7 @@ skel.setup({
 		["NAME"] = skeld.get_author,
 		["EMAIL"] = skeld.get_email,
 		["DATE"] = skeld.get_date,
-    ["YEAR"] = skeld.get_year,
+		["YEAR"] = skeld.get_year,
 		["CPP_HDR_GUARD"] = skeld.get_cppheaderguard,
 		["CPP_TEST_HDR_GUARD"] = skeld.get_testheaderguard,
 		["CPP_HDR_INCLUDE"] = skeld.get_headerinclude_quote,
