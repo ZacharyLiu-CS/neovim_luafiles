@@ -1,5 +1,5 @@
 local themes_name = "dracula"
-local colorscheme = "nightfox"
+local colorscheme = "gruvbox"
 
 local status_scheme_ok, themes_plugin = pcall(require, themes_name)
 if not status_scheme_ok then
