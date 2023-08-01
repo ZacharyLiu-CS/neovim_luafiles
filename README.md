@@ -15,7 +15,7 @@ This repo is highly inspired by [@ChristianChiarulli](https://github.com/Christi
 5. tmux
 6. ripgrep
 7. fd
-8. gcc, clang, rust, python, lua, node
+8. gcc, clang, rust, python, lua, node, zig
 9. htop
 10. lazygit
 11. stylua
@@ -58,88 +58,11 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 
 (in lua/plugins/catalogs.lua, using lazy to manage all plugins)
 
-```
-	"wbthomason/packer.nvim", -- Have packer manage itself
-
-	-- My plugins here
-	"nvim-lua/plenary.nvim", -- Lua module required by many :plugins (e.g., telescope)
-
-	-- Color scheme
-	"kyazdani42/nvim-web-devicons", -- config the icon
-	"AbdelrahmanDwedar/awesome-nvim-colorschemes", -- config in colorscheme.lua file
-
-	-- Status line
-	"nvim-lualine/lualine.nvim",
-	"akinsho/bufferline.nvim",
-	"lewis6991/gitsigns.nvim",
-	"moll/vim-bbye", -- close buffer in better way
-	"aserowy/tmux.nvim",
-
-	-- File exploer
-	"kyazdani42/nvim-tree.lua",
-
-	-- Completion
-	"hrsh7th/nvim-cmp",
-	"hrsh7th/cmp-nvim-lsp",
-	"hrsh7th/cmp-buffer",
-	"hrsh7th/cmp-path",
-	"hrsh7th/cmp-cmdline",
-	"hrsh7th/cmp-nvim-lua",
-	"onsails/lspkind-nvim",
-	"rafamadriz/friendly-snippets",
-
-	-- Snippets
-	"L3MON4D3/LuaSnip",
-	"saadparwaiz1/cmp_luasnip",
-
-	-- LSP
-	"neovim/nvim-lspconfig",
-	"williamboman/mason.nvim",
-	"williamboman/mason-lspconfig.nvim",
-	"jose-elias-alvarez/null-ls.nvim",
-	"RRethy/vim-illuminate",
-
-	-- Code highlihting and autopairs
-	{
-		"nvim-treesitter/nvim-treesitter",
-		dependencies = {
-			"RRethy/nvim-treesitter-textsubjects",
-		},
-	},
-
-	"windwp/nvim-autopairs",
-	"lukas-reineke/indent-blankline.nvim",
-
-	-- Comment
-	"numToStr/Comment.nvim",
-
-	-- Fuzzy search
-	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = {
-			"nvim-telescope/telescope-ui-select.nvim",
-			"nvim-telescope/telescope-project.nvim",
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build = "make",
-			},
-		},
-	},
-	-- Telescope plugins
-
-	-- Float terminal
-	"akinsho/toggleterm.nvim",
-
-	-- Project management
-	"ahmedkhalf/project.nvim",
-
-	-- Fast start
-	"lewis6991/impatient.nvim",
-
-	"folke/which-key.nvim",
-  
-    "folke/zen-mode.nvim",
-
+## Update
+```lua
+:Lazy update
+:TSUpdate
+:Mason && U(update)
 ```
 
 ## Key bindings
@@ -176,6 +99,13 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 | `<C-w>`                    | normal | close the buffer                               |
 | `right click on tab`       | normal | show the buffer in a vertically splited window |
 | `left click on close icon` | normal | close the buffer                               |
+
+### Hop 
+| Key       | Mode   | Effect                        |
+| ----------| ------ | ----------------------------- |
+| `f`       | normal |  hop words                    |
+| `F`       | normal | hop next 1 char               |
+
 
 ### NVimTree
 

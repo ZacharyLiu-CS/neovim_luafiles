@@ -23,7 +23,7 @@ lazy.setup({
 
 	-- My plugins here
 	"nvim-lua/plenary.nvim", -- Lua module required by many :plugins (e.g., telescope)
-  "rcarriga/nvim-notify",
+	"rcarriga/nvim-notify",
 
 	-- Color scheme
 	"kyazdani42/nvim-web-devicons", -- config the icon
@@ -55,6 +55,7 @@ lazy.setup({
 	-- Snippets
 	"L3MON4D3/LuaSnip",
 	"saadparwaiz1/cmp_luasnip",
+	"zacharyliu-cs/skel-nvim",
 
 	-- LSP
 	"neovim/nvim-lspconfig",
@@ -77,11 +78,10 @@ lazy.setup({
 	-- Comment
 	"numToStr/Comment.nvim",
 
-	-- Fuzzy search
+	-- Telescope with plugins
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
-			"nvim-telescope/telescope-ui-select.nvim",
 			"nvim-telescope/telescope-project.nvim",
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
@@ -89,8 +89,11 @@ lazy.setup({
 			},
 		},
 	},
-	-- Telescope plugins
-
+	-- Better UI selection and input
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
 	-- Float terminal
 	"akinsho/toggleterm.nvim",
 
@@ -102,7 +105,11 @@ lazy.setup({
 
 	-- Help to insert command
 	"folke/which-key.nvim",
-  
-  "folke/zen-mode.nvim",
 
+	-- Quick jump to other location
+	{
+		"phaazon/hop.nvim",
+		branch = "v2", -- optional but strongly recommended
+	},
+	"folke/zen-mode.nvim",
 })

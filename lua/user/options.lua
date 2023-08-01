@@ -22,6 +22,7 @@ local options = {
   timeoutlen = 500,                        -- time to wait for a mapped sequence to complete (in milliseconds)
   autoread = true,                         -- auto read while file is modified outside
   autowrite = true,                        -- auto save content
+  autochdir = true,                        -- auto change the current working directory 
   undofile = true,                         -- enable persistent undo
   updatetime = 300,                        -- faster completion (4000ms default)
   writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
