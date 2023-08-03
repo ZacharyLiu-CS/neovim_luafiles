@@ -8,6 +8,7 @@ local options = {
   wildmenu = true,                         -- allows you to use <Left> or <Right> to navigate through the completion lists. 
   wildmode ="longest:list,full",           -- complete to longest string and show the the match list
   hlsearch = true,                         -- highlight all matches on previous search pattern
+  spell = true,                            -- enable the spell check
   ignorecase = true,                       -- ignore case in search patterns
   mouse = "a",                             -- allow the mouse to be used in neovim
   pumheight = 10,                          -- pop up menu height
