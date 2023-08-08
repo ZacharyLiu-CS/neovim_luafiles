@@ -108,8 +108,9 @@ lazy.setup({
 
 	-- Quick jump to other location
 	{
-		"phaazon/hop.nvim",
-		branch = "v2", -- optional but strongly recommended
+		"folke/flash.nvim",
+		event = "VeryLazy",
+
 	},
 	"folke/zen-mode.nvim",
 })
