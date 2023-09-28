@@ -5,6 +5,10 @@
 // Copyright (c) @YEAR@ @EMAIL@.
 //
 
-fn main() {
-    println!("Hello World!");
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("hello world")
 }
