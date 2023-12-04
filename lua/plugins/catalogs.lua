@@ -73,7 +73,11 @@ lazy.setup({
 	},
 
 	"windwp/nvim-autopairs",
-	"lukas-reineke/indent-blankline.nvim",
+		
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		version = "2.20.8",
+	}
 
 	-- Comment
 	"numToStr/Comment.nvim",
