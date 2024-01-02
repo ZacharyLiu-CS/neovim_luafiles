@@ -73,7 +73,11 @@ lazy.setup({
 	},
 
 	"windwp/nvim-autopairs",
-	"lukas-reineke/indent-blankline.nvim",
+		
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		version = "2.20.8",
+	}
 
 	-- Comment
 	"numToStr/Comment.nvim",
@@ -108,8 +112,9 @@ lazy.setup({
 
 	-- Quick jump to other location
 	{
-		"phaazon/hop.nvim",
-		branch = "v2", -- optional but strongly recommended
+		"folke/flash.nvim",
+		event = "VeryLazy",
+
 	},
 	"folke/zen-mode.nvim",
 })

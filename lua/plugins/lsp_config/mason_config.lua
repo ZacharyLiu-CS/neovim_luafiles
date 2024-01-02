@@ -1,10 +1,8 @@
 local servers = {
 	"lua_ls",
 	"pyright",
-	"jsonls",
   "rust_analyzer",
   "clangd",
-  "zls",
 }
 
 local settings = {

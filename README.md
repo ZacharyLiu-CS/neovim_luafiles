@@ -100,11 +100,15 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 | `right click on tab`       | normal | show the buffer in a vertically splited window |
 | `left click on close icon` | normal | close the buffer                               |
 
-### Hop 
-| Key       | Mode   | Effect                        |
-| ----------| ------ | ----------------------------- |
-| `f`       | normal |  hop words                    |
-| `F`       | normal | hop next 1 char               |
+### flash 
+| Key       | Mode   | Effect                                           |
+| ----------| ------ | ------------------------------------------------ |
+| `/`       | normal |  regular search and jump                         |
+| `?`       | normal |  regular search and jump                         |
+| `s`       | normal |  enter jump mode                                 |
+| `S`       | normal |  enter flash treesitter                          |
+| `f`/`t`   | normal |  find {char} and jump to next char with `f`/`t`  |
+| `F`/`T`   | normal |  find {char} and jump to prev char with `F`/`T`  |
 
 
 ### NVimTree
