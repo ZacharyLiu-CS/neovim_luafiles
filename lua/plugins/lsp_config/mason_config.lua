@@ -3,6 +3,7 @@ local servers = {
 	"pyright",
   "rust_analyzer",
   "clangd",
+  "zls",
 }
 
 local settings = {
