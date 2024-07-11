@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 #2. define the name of project
-project(@FILENAME@)
+project(main)
 
 #3. specify c++ compiler version
 set(CMAKE_CXX_STANDARD 17)
