@@ -109,7 +109,10 @@ lazy.setup({
 	"ahmedkhalf/project.nvim",
 
 	-- Help to insert command
-	"folke/which-key.nvim",
+	{
+    "folke/which-key.nvim",
+    version = "v2.1.0"
+  },
 
 	-- Quick jump to other location
 	{
