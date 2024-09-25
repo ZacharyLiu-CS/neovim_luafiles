@@ -108,9 +108,6 @@ lazy.setup({
 	-- Project management
 	"ahmedkhalf/project.nvim",
 
-	-- Fast start
-	"lewis6991/impatient.nvim",
-
 	-- Help to insert command
 	"folke/which-key.nvim",
 

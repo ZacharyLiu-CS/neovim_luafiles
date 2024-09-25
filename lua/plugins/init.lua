@@ -1,6 +1,5 @@
 require("plugins.catalogs")
 require("plugins.notify_config")
-require("plugins.impatient_config")
 require("plugins.colorscheme_config")
 require("plugins.cmp_config")
 require("plugins.skel_config")
