@@ -67,7 +67,7 @@ lazy.setup({
 	"neovim/nvim-lspconfig",
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
-	"jose-elias-alvarez/null-ls.nvim",
+	"nvimtools/none-ls.nvim",
 	"RRethy/vim-illuminate",
 
 	-- Code highlihting and autopairs
