@@ -14,7 +14,6 @@ treesitter_configs.setup({
 		"lua",
 		"rust",
 		"go",
-		"latex",
 		"markdown",
 		"make",
 		"cmake",

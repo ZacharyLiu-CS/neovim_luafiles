@@ -56,9 +56,8 @@ lazy.setup({
 	{
 	  "L3MON4D3/LuaSnip",
 	  -- follow latest release.
-	  version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 	  -- install jsregexp (optional!).
-	  build = "make install_jsregexp"
+	  build = "make install_jsregexp CC=gcc"
   },
 	"saadparwaiz1/cmp_luasnip",
 	"zacharyliu-cs/skel-nvim",
@@ -68,7 +67,6 @@ lazy.setup({
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
 	"nvimtools/none-ls.nvim",
-	"RRethy/vim-illuminate",
 
 	-- Code highlihting and autopairs
 	{
@@ -80,7 +78,6 @@ lazy.setup({
 		
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		version = "2.20.8",
 	},
 
 	-- Comment
@@ -111,7 +108,6 @@ lazy.setup({
 	-- Help to insert command
 	{
     "folke/which-key.nvim",
-    version = "v2.1.0"
   },
 
 	-- Quick jump to other location
