@@ -15,8 +15,8 @@ skel.setup({
 	-- enable/disable processing for bufread + empty file case (default)
 	apply_skel_for_empty_file = true,
 
-	author = "Zacharyliu-CS",
-	email = "liuzhenm@mail.ustc.edu.cn",
+	author = "zacharyzliu",
+	email = "zacharyzliu@tencent.com",
 
 	-- file pattern -> template mappings (default)
 	mappings = {
