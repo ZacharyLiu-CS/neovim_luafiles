@@ -53,13 +53,13 @@ vim.g.clipboard = {
   name = 'macOS-clipboard',
   -- When you use the "+y or "*y commands in Neovim, it will copy the selected text to the clipboard using mac pbcopy .
   copy = {
-    ['+'] = 'mac pbcopy', -- You can use `mac link pbcopy` first, then just use pbcopy
-    ['*'] = 'mac pbcopy',
+    ['+'] = 'pbcopy', -- You can use `mac link pbcopy` first, then just use pbcopy
+    ['*'] = 'pbcopy',
   },
   -- When you use the "+p or "*p commands in Neovim, it will paste the clipboard content by invoking mac pbpaste.
   paste = {
-    ['+'] = 'mac pbpaste',
-    ['*'] = 'mac pbpaste',
+    ['+'] = 'pbpaste',
+    ['*'] = 'pbpaste',
   },
   cache_enabled = 0,
 }
