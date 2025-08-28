@@ -33,6 +33,11 @@ lazy.setup({
 	"nvim-lualine/lualine.nvim",
 	"akinsho/bufferline.nvim",
 	"lewis6991/gitsigns.nvim",
+  {
+    "f-person/git-blame.nvim",
+    event = "VeryLazy"
+  },
+ 
 	"moll/vim-bbye", -- close buffer in better way
 	"aserowy/tmux.nvim",
 
