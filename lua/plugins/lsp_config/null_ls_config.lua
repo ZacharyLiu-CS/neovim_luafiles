@@ -4,15 +4,29 @@ if not null_ls_status_ok then
   return
 end
 
+-- 只注册本机确实存在的可执行文件，避免每次启动/格式化时刷
+-- "command xxx is not executable" 的错误。装好对应工具后重启 nvim 即会自动启用。
+local function executable(cmd)
+  return vim.fn.executable(cmd) == 1
+end
 
 -- register any number of sources simultaneously
 local sources = {
-    null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.clang_format,
-    null_ls.builtins.formatting.stylua,
-    null_ls.builtins.code_actions.gitsigns,
-    null_ls.builtins.diagnostics.write_good,
+  null_ls.builtins.code_actions.gitsigns,
 }
+
+if executable("prettier") then
+  table.insert(sources, null_ls.builtins.formatting.prettier)
+end
+if executable("clang-format") then
+  table.insert(sources, null_ls.builtins.formatting.clang_format)
+end
+if executable("stylua") then
+  table.insert(sources, null_ls.builtins.formatting.stylua)
+end
+if executable("write-good") then
+  table.insert(sources, null_ls.builtins.diagnostics.write_good)
+end
 
 null_ls.setup({ sources = sources })
 

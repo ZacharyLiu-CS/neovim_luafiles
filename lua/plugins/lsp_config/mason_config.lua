@@ -1,17 +1,17 @@
 local servers = {
 	"lua_ls",
-  "rust_analyzer",
-  "clangd",
-  "zls",
+	"rust_analyzer",
+	"clangd",
+	"zls",
 }
 
 local settings = {
 	ui = {
 		border = "none",
 		icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗"
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
 		},
 	},
 	log_level = vim.log.levels.INFO,
@@ -21,29 +21,26 @@ local settings = {
 require("mason").setup(settings)
 require("mason-lspconfig").setup({
 	ensure_installed = servers,
-	automatic_installation = true,
+	-- mason-lspconfig 2.x 的 automatic_installation 已被移除，
+	-- 是否自动启用改由 automatic_enable 控制；这里由下面显式 vim.lsp.enable 接管。
+	automatic_enable = false,
 })
 
-local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_status_ok then
-	vim.notify("Fail to load plugin: lspconfig!", "error")
-	return
-end
-
-local opts = {}
-
-for _, server in pairs(servers) do
-	opts = {
-		on_attach = require("plugins.lsp_config.setup").on_attach,
-		capabilities = require("plugins.lsp_config.setup").capabilities,
-	}
-
-	server = vim.split(server, "@")[1]
-
-	local require_ok, conf_opts = pcall(require, "plugins.lsp_config.servers" .. server)
-	if require_ok then
-		opts = vim.tbl_deep_extend("force", conf_opts, opts)
+-- 加载 servers/<name>.lua 中的 server 专属配置。
+-- 原代码少了一个 "."，导致这些文件从来没有被加载成功过。
+-- 另外 rust-analyzer 的文件名是 "rust-analyzer.lua"（短横线），需要额外兼容。
+local function load_server_config(server)
+	for _, name in ipairs({ server, (server:gsub("_", "-")) }) do
+		local ok, conf = pcall(require, "plugins.lsp_config.servers." .. name)
+		if ok and type(conf) == "table" then
+			return conf
+		end
 	end
-
-	lspconfig[server].setup(opts)
+	return {}
 end
+
+for _, server in ipairs(servers) do
+	vim.lsp.config(server, load_server_config(server))
+end
+
+vim.lsp.enable(servers)

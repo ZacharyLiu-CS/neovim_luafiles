@@ -1,17 +1,44 @@
 local M = {}
 
-local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_cmp_ok then
+-- Neovim 0.11+ 推荐用 vim.lsp.config / vim.lsp.enable 配置 LSP，
+-- 不再使用已被移除的 vim.lsp.with() 和 vim.lsp.handlers。
+M.capabilities = {}
+
+local cmp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if cmp_status_ok then
+	M.capabilities = cmp_nvim_lsp.default_capabilities()
+else
 	vim.notify("Fail to load plugin: cmp_nvim_lsp!", "error")
-	return
 end
 
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
-M.capabilities.offsetEncoding = { "utf-16" } -- config for clangd warnings (https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428)
+local keymap_opts = { noremap = true, silent = true }
 
-M.setup = function()
+local function lsp_keymaps(bufnr)
+	local keymap = vim.api.nvim_buf_set_keymap
+	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", keymap_opts)
+	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", keymap_opts)
+	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover({ border = 'rounded' })<CR>", keymap_opts)
+	keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", keymap_opts)
+	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", keymap_opts)
+	keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", keymap_opts)
+	keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", keymap_opts)
+	-- nvim-lspconfig 2.x 不再注册 :LspInfo，改用内置的 :checkhealth vim.lsp
+	keymap(bufnr, "n", "<leader>li", "<cmd>checkhealth vim.lsp<cr>", keymap_opts)
+	-- :LspInstallInfo 也已移除，安装 LSP 用 :Mason
+	keymap(bufnr, "n", "<leader>lI", "<cmd>Mason<cr>", keymap_opts)
+	keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", keymap_opts)
+	-- vim.lsp.diagnostic.goto_next/prev 在新版本中已不存在
+	keymap(bufnr, "n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({ buffer = 0 })<cr>", keymap_opts)
+	keymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({ buffer = 0 })<cr>", keymap_opts)
+	keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", keymap_opts)
+	keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help({ border = 'rounded' })<CR>", keymap_opts)
+	keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", keymap_opts)
+end
+
+-- 保持向后兼容：外部如果还引用 M.on_attach 也仍然可用
+M.on_attach = lsp_keymaps
+
+function M.setup()
 	vim.diagnostic.config({
 		virtual_text = false, -- disable virtual text
 		signs = {
@@ -22,10 +49,10 @@ M.setup = function()
 				[vim.diagnostic.severity.HINT] = "󰌵",
 			},
 			texthl = {
-				[vim.diagnostic.severity.ERROR] = "Error",
-				[vim.diagnostic.severity.WARN] = "Warn",
-				[vim.diagnostic.severity.INFO] = "Info",
-				[vim.diagnostic.severity.HINT] = "Hint",
+				[vim.diagnostic.severity.ERROR] = "DiagnosticError",
+				[vim.diagnostic.severity.WARN] = "DiagnosticWarn",
+				[vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+				[vim.diagnostic.severity.HINT] = "DiagnosticHint",
 			},
 			numhl = {
 				[vim.diagnostic.severity.ERROR] = "",
@@ -48,33 +75,18 @@ M.setup = function()
 		},
 	})
 
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-		border = "rounded",
+	-- 全局能力配置，会在每个 server 启动时合并进去
+	vim.lsp.config("*", {
+		capabilities = M.capabilities,
 	})
 
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-		border = "rounded",
+	-- 用 LspAttach 挂 buffer 级键位，避免覆盖 server 自带的 on_attach
+	vim.api.nvim_create_autocmd("LspAttach", {
+		group = vim.api.nvim_create_augroup("UserLspAttach", { clear = true }),
+		callback = function(args)
+			lsp_keymaps(args.buf)
+		end,
 	})
-end
-
-local function lsp_keymaps(bufnr)
-	local opts = { noremap = true, silent = true }
-	local keymap = vim.api.nvim_buf_set_keymap
-	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-	keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
-	keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
-	keymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)
-	keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-	keymap(bufnr, "n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
-	keymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", opts)
-	keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-	keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-	keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 end
 
 return M
