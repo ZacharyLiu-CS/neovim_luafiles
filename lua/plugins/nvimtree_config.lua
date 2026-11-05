@@ -10,7 +10,7 @@ local function my_on_attach(bufnr)
   local api = require('nvim-tree.api')
 
   local function opts(desc)
-    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    return { desc = 'nvim-tree: ' .. desc, buf = bufnr, silent = true, nowait = true }
   end
   vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
   vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
@@ -24,10 +24,12 @@ nvim_tree.setup({
   on_attach = my_on_attach,
 	update_focused_file = {
 		enable = true,
-		update_cwd = true,
+		update_root = {
+			enable = true,
+		},
 	},
 	renderer = {
-		root_folder_modifier = ":t",
+		root_folder_label = ":t",
 		indent_width = 2,
 		indent_markers = {
 			enable = true,

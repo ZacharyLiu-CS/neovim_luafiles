@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
 		"clone",
@@ -19,8 +19,6 @@ if not status_ok then
 end
 
 lazy.setup({
-	"wbthomason/packer.nvim", -- Have packer manage itself
-
 	-- My plugins here
 	"nvim-lua/plenary.nvim", -- Lua module required by many :plugins (e.g., telescope)
 	"rcarriga/nvim-notify",
@@ -122,4 +120,8 @@ lazy.setup({
 
 	},
 	"folke/zen-mode.nvim",
+}, {
+	-- No plugin in this config needs luarocks; disabling avoids the
+	-- hererocks error in :checkhealth lazy.
+	rocks = { enabled = false },
 })

@@ -4,15 +4,10 @@ if not status_ok then
 	return
 end
 
-which_key.setup( {
-  opts = {
-	mode = "n", -- NORMAL mode
-	prefix = "<leader>",
-	buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-	silent = true, -- use `silent` when creating keymaps
-	noremap = true, -- use `noremap` when creating keymaps
-	nowait = true, -- use `nowait` when creating keymaps
-  }
+-- which-key 3.x takes its options at the top level; the old `opts = {...}`
+-- wrapper is ignored.
+which_key.setup({
+	preset = "classic",
 })
 which_key.add( {
 		{ "<leader>L", group = "Lazy", nowait = true, remap = false },
@@ -259,8 +254,8 @@ which_key.add( {
 		{ "<leader>l", group = "LSP", nowait = true, remap = false },
 		{
 			"<leader>lI",
-			"<cmd>LspInstallInfo<cr>",
-			desc = "Installer Info",
+			"<cmd>Mason<cr>",
+			desc = "Installer",
 			nowait = true,
 			remap = false,
 		},
@@ -294,21 +289,21 @@ which_key.add( {
 		},
 		{
 			"<leader>li",
-			"<cmd>LspInfo<cr>",
+			"<cmd>checkhealth vim.lsp<cr>",
 			desc = "Info",
 			nowait = true,
 			remap = false,
 		},
 		{
 			"<leader>lj",
-			"<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+			"<cmd>lua vim.diagnostic.jump({ count = 1 })<CR>",
 			desc = "Next Diagnostic",
 			nowait = true,
 			remap = false,
 		},
 		{
 			"<leader>lk",
-			"<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
+			"<cmd>lua vim.diagnostic.jump({ count = -1 })<cr>",
 			desc = "Prev Diagnostic",
 			nowait = true,
 			remap = false,

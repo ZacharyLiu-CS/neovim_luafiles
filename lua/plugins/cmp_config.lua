@@ -111,14 +111,8 @@ cmp.setup({
   }
   })
 
-  -- Set configuration for specific filetype.
-  cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-    }, {
-      { name = 'buffer' },
-    })
-  })
+  -- `cmp_git` is not installed; registering it makes gitcommit buffers report
+  -- "source cmp_git not found". gitcommit now falls back to the global sources.
 
   -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline({ '/', '?' }, {

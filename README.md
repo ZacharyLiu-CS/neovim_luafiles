@@ -155,7 +155,7 @@ set -ga terminal-overrides ",xterm-256color*:RGB"
 | `gr`         | normal | go to references         |
 | `gl`         | normal | open diagnostic in float |
 | `gI`         | normal | go to implementation     |
-| `<leader>li` | normal | view LspInfo             |
+| `<leader>li` | normal | view LSP health check    |
 | `<leader>lr` | normal | lsp rename               |
 
 ### Comment

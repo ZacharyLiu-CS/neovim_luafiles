@@ -1,17 +1,57 @@
 local M = {}
 
-local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_cmp_ok then
+-- Neovim 0.11+ configures clients through vim.lsp.config / vim.lsp.enable.
+-- The old vim.lsp.with() and vim.lsp.handlers customization used below has
+-- been removed from Neovim 0.12.
+M.capabilities = {}
+
+local cmp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if cmp_status_ok then
+	M.capabilities = cmp_nvim_lsp.default_capabilities()
+	-- Keep clangd's preferred offset encoding (avoids its UTF-8 warning).
+	M.capabilities.offsetEncoding = { "utf-16" }
+else
 	vim.notify("Fail to load plugin: cmp_nvim_lsp!", "error")
-	return
 end
 
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
-M.capabilities.offsetEncoding = { "utf-16" } -- config for clangd warnings (https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428)
+local function lsp_keymaps(bufnr)
+	local function map(lhs, rhs, desc)
+		vim.keymap.set("n", lhs, rhs, { buf = bufnr, silent = true, desc = desc })
+	end
 
-M.setup = function()
+	map("gD", vim.lsp.buf.declaration, "LSP: Go to declaration")
+	map("gd", vim.lsp.buf.definition, "LSP: Go to definition")
+	map("K", function()
+		vim.lsp.buf.hover({ border = "rounded" })
+	end, "LSP: Hover documentation")
+	map("gI", vim.lsp.buf.implementation, "LSP: Go to implementation")
+	map("gr", vim.lsp.buf.references, "LSP: Go to references")
+	map("gl", vim.diagnostic.open_float, "LSP: Open diagnostic float")
+	map("<leader>lf", function()
+		vim.lsp.buf.format({ async = true })
+	end, "LSP: Format buffer")
+	-- nvim-lspconfig no longer registers :LspInfo; use the built-in healthcheck.
+	map("<leader>li", "<cmd>checkhealth vim.lsp<cr>", "LSP: Info")
+	-- :LspInstallInfo was removed with nvim-lsp-installer; Mason replaces it.
+	map("<leader>lI", "<cmd>Mason<cr>", "LSP: Installer")
+	map("<leader>la", vim.lsp.buf.code_action, "LSP: Code action")
+	map("<leader>lj", function()
+		vim.diagnostic.jump({ count = 1 })
+	end, "LSP: Next diagnostic")
+	map("<leader>lk", function()
+		vim.diagnostic.jump({ count = -1 })
+	end, "LSP: Previous diagnostic")
+	map("<leader>lr", vim.lsp.buf.rename, "LSP: Rename")
+	map("<leader>ls", function()
+		vim.lsp.buf.signature_help({ border = "rounded" })
+	end, "LSP: Signature help")
+	map("<leader>lq", vim.diagnostic.setloclist, "LSP: Quickfix")
+end
+
+-- Kept for compatibility with configs that still reference M.on_attach.
+M.on_attach = lsp_keymaps
+
+function M.setup()
 	vim.diagnostic.config({
 		virtual_text = false, -- disable virtual text
 		signs = {
@@ -22,10 +62,10 @@ M.setup = function()
 				[vim.diagnostic.severity.HINT] = "󰌵",
 			},
 			texthl = {
-				[vim.diagnostic.severity.ERROR] = "Error",
-				[vim.diagnostic.severity.WARN] = "Warn",
-				[vim.diagnostic.severity.INFO] = "Info",
-				[vim.diagnostic.severity.HINT] = "Hint",
+				[vim.diagnostic.severity.ERROR] = "DiagnosticError",
+				[vim.diagnostic.severity.WARN] = "DiagnosticWarn",
+				[vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+				[vim.diagnostic.severity.HINT] = "DiagnosticHint",
 			},
 			numhl = {
 				[vim.diagnostic.severity.ERROR] = "",
@@ -48,33 +88,19 @@ M.setup = function()
 		},
 	})
 
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-		border = "rounded",
+	-- Global client capabilities, merged into every server config below.
+	vim.lsp.config("*", {
+		capabilities = M.capabilities,
 	})
 
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-		border = "rounded",
+	-- Attach buffer-local keymaps when a server starts. This avoids
+	-- overwriting a server's own on_attach callback.
+	vim.api.nvim_create_autocmd("LspAttach", {
+		group = vim.api.nvim_create_augroup("UserLspAttach", { clear = true }),
+		callback = function(args)
+			lsp_keymaps(args.buf)
+		end,
 	})
-end
-
-local function lsp_keymaps(bufnr)
-	local opts = { noremap = true, silent = true }
-	local keymap = vim.api.nvim_buf_set_keymap
-	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-	keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
-	keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
-	keymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)
-	keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-	keymap(bufnr, "n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
-	keymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", opts)
-	keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-	keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-	keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 end
 
 return M
