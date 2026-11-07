@@ -31,7 +31,10 @@ treesitter_configs.setup({
 	autopairs = {
 		enable = true,
 	},
-	indent = { enable = true, disable = { "python", "css" } },
+	-- Neovim 0.12 + nvim-treesitter master：indent 模块的谓词会报错
+	-- (query_predicates.lua: attempt to call method 'type' (a nil value))。
+	-- 缩进改用 Vim 自带 cindent，格式交给保存时的 clang-format。
+	indent = { enable = false },
   textsubjects = {
 		enable = true,
 		prev_selection = ",", -- (Optional) keymap to select the previous selection
