@@ -87,6 +87,26 @@ function M.setup()
 			lsp_keymaps(args.buf)
 		end,
 	})
+
+	-- 保存时自动格式化（含 :w、:wa 以及 autowrite 触发的写入）。
+	-- 只对确实有格式化能力的 LSP 客户端生效，例如 C/C++ 的 clangd。
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		group = vim.api.nvim_create_augroup("UserLspFormatOnSave", { clear = true }),
+		callback = function(args)
+			local bufnr = args.buf
+			local clients = vim.lsp.get_clients({ bufnr = bufnr, method = "textDocument/formatting" })
+			if #clients == 0 then
+				return
+			end
+			-- 同时挂了多个格式化客户端时只用一个，避免同一文件被格式化多次
+			vim.lsp.buf.format({
+				bufnr = bufnr,
+				id = clients[1].id,
+				async = false,
+				timeout_ms = 2000,
+			})
+		end,
+	})
 end
 
 return M
